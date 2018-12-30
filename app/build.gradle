@@ -1,0 +1,76 @@
+/*
+ * Copyright (c) 2018. by Sebastian Witasik
+ * All rights reserved. No part of this application may be reproduced or be part of other software, without the prior written permission of the publisher. For permission requests, write to the author(WitasikSebastian@gmail.com).
+ */
+
+apply plugin: 'com.android.application'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+    defaultConfig {
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+        applicationId globalConfiguration["applicationId"]
+        versionName globalConfiguration["versionName"]
+        testInstrumentationRunner globalConfiguration["testInstrumentationRunner"]
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    //Android view
+    implementation "com.android.support:design:$appcompat"
+    implementation "com.android.support:recyclerview-v7:$appcompat"
+    implementation "com.android.support.constraint:constraint-layout:$constraintLayout"
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnife"
+    implementation "com.jakewharton:butterknife:$butterKnife"
+
+    //    Android compatibility stuff
+    implementation "com.android.support:support-v4:$appcompat"
+    implementation "com.android.support:appcompat-v7:$appcompat"
+
+    //      Lifecycle components
+//    implementation "android.arch.lifecycle:extensions:$archLifecycleVersion"
+//    annotationProcessor "android.arch.lifecycle:compiler:$archLifecycleVersion"
+
+    //      Google services
+    implementation "com.firebase:firebase-jobdispatcher:$firebaseDispatcherVersion"
+    implementation "com.google.android.gms:play-services-analytics:$googleAnalVersion"
+
+    /*
+                MODULES
+     */
+
+    implementation project(':data')
+    implementation project(':domain')
+
+    /*
+                TESTS
+     */
+    testImplementation "junit:junit:$junit"
+    androidTestImplementation "com.android.support.test:runner:$supportTestRunner"
+    androidTestImplementation "com.android.support.test:rules:$supportTestRunner"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoCore"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espressoCore"
+    androidTestImplementation("com.android.support.test.espresso:espresso-idling-resource:$espressoCore") {
+        exclude module: 'support-annotations'
+    }
+    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:$espressoContrib") {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'support-v7'
+        exclude group: 'com.android.support', module: 'design'
+        exclude module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+    }
+}
