@@ -106,10 +106,7 @@
 
             </android.support.constraint.ConstraintLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/inner_shadow"/>
+            <include layout="@layout/transparent_border_with_ripple"/>
 
         </android.support.v7.widget.CardView>
 
@@ -157,10 +154,7 @@
 
             </android.support.constraint.ConstraintLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/inner_shadow"/>
+            <include layout="@layout/transparent_border_with_ripple"/>
 
         </android.support.v7.widget.CardView>
 
@@ -210,10 +204,7 @@
 
             </android.support.constraint.ConstraintLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/inner_shadow"/>
+            <include layout="@layout/transparent_border_with_ripple"/>
 
         </android.support.v7.widget.CardView>
 
@@ -261,10 +252,7 @@
 
             </android.support.constraint.ConstraintLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/inner_shadow"/>
+            <include layout="@layout/transparent_border_with_ripple"/>
 
         </android.support.v7.widget.CardView>
 
@@ -314,10 +302,7 @@
 
             </android.support.constraint.ConstraintLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/inner_shadow"/>
+            <include layout="@layout/transparent_border_with_ripple"/>
 
         </android.support.v7.widget.CardView>
 
@@ -365,10 +350,7 @@
 
             </android.support.constraint.ConstraintLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/inner_shadow"/>
+            <include layout="@layout/transparent_border_with_ripple"/>
 
         </android.support.v7.widget.CardView>
 
