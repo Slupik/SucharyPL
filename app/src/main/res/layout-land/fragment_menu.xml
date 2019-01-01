@@ -12,7 +12,7 @@
                                              android:layout_height="match_parent"
                                              android:shrinkColumns="*"
                                              android:stretchColumns="*"
-                                             tools:context=".app.view.fragment.MenuFragment">
+                                             tools:context=".app.view.fragment.menu.MenuFragment">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -68,6 +68,7 @@
             <!-- Row 1 -->
 
             <android.support.v7.widget.CardView
+                android:id="@+id/mi_random"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_columnWeight="1"
@@ -118,6 +119,7 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/mi_fav"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_columnWeight="1"
@@ -170,6 +172,7 @@
             <!-- Row 2 -->
 
             <android.support.v7.widget.CardView
+                android:id="@+id/mi_cat"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_columnWeight="1"
@@ -220,6 +223,7 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/mi_online"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_columnWeight="1"
@@ -272,6 +276,7 @@
             <!-- Row 3 -->
 
             <android.support.v7.widget.CardView
+                android:id="@+id/mi_learn"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_columnWeight="1"
@@ -322,6 +327,7 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/mi_shop"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_columnWeight="1"
