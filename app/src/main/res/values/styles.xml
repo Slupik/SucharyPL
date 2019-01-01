@@ -1,11 +1,41 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- APP BAR AND STATUS BAR STUFF -->
+        <!--<item name="android:statusBarColor">@color/colorAccent</item>-->
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:actionBarStyle">@style/CustomActionBar</item>
+        <item name="android:actionBarTabTextStyle">@style/ActionBarText</item>
+        <item name="android:actionMenuTextColor">@color/colorPrimaryText</item>
+        <item name="android:actionMenuTextAppearance">@style/ActionBarText</item>
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/CustomActionBar</item>
+        <item name="actionBarTabTextStyle">@style/ActionBarText</item>
+        <item name="actionMenuTextColor">@color/colorPrimaryText</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="actionMenuTextAppearance">@style/ActionBarText</item>
+
+    </style>
+
+    <style name="ActionBarText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CustomActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
+        <item name="android:titleTextStyle">@style/ActionBarText</item>
+        <item name="android:backgroundSplit">@drawable/main_gradient</item>
+        <item name="android:background">@drawable/main_gradient</item>
+        <!-- Support library compatibility -->
+        <item name="titleTextStyle">@style/ActionBarText</item>
+        <item name="background">@drawable/main_gradient</item>
+        <item name="backgroundSplit">@drawable/main_gradient</item>
     </style>
 
 </resources>
