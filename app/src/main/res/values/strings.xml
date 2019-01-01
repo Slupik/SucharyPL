@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">SucharyPL</string>
+    <string name="lorem_ipsum_mid">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla molestie sit amet enim maximus elementum. Vestibulum fringilla nisl quis risus consequat bibendum. Donec at erat imperdiet, rhoncus libero at, accumsan nisl. Quisque porttitor tortor ut nunc finibus, sit amet laoreet est molestie.</string>
+
+    <string name="main_menu_title_random">Random</string>
+    <string name="main_menu_title_fav">Favourites</string>
+    <string name="main_menu_title_cat">Categories</string>
+    <string name="main_menu_title_online">Online</string>
+    <string name="main_menu_title_learn">Master of jokes</string>
+    <string name="main_menu_title_shop">Shop</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="random_jokes_title">Random Jokes</string>
 </resources>

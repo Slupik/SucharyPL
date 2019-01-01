@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2019. by Sebastian Witasik
+  ~ All rights reserved. No part of this application may be reproduced or be part of other software, without the prior written permission of the publisher. For permission requests, write to the author(WitasikSebastian@gmail.com).
+  -->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:shrinkColumns="*"
+                                             android:stretchColumns="*"
+                                             tools:context=".app.view.fragment.menu.MenuFragment">
+
+    <android.support.v7.widget.GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:columnCount="2"
+        app:rowCount="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent">
+
+        <!-- Row 1 -->
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:layout_columnSpan="2"
+            >
+
+            <ScrollView
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_main_menu_item_joke">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="@string/lorem_ipsum_mid"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/joke_of_the_day_size"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            </ScrollView>
+
+        </android.support.v7.widget.CardView>
+
+        <!-- Row 2 -->
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/mi_random"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            >
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_main_menu_item_random">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/dice"
+                    android:padding="4dp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_menu_title_random"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/main_menu_item_title_size"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <include layout="@layout/transparent_border_with_ripple"/>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/mi_fav"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            >
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_main_menu_item_fav">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/favorite"
+                    android:padding="4dp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_menu_title_fav"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/main_menu_item_title_size"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <include layout="@layout/transparent_border_with_ripple"/>
+
+        </android.support.v7.widget.CardView>
+
+        <!-- Row 3 -->
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/mi_cat"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            >
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_main_menu_item_cat">
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/list"
+                    android:padding="4dp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_menu_title_cat"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/main_menu_item_title_size"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <include layout="@layout/transparent_border_with_ripple"/>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/mi_online"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            >
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_main_menu_item_online">
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/wifi_signal"
+                    android:padding="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_menu_title_online"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/main_menu_item_title_size"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <include layout="@layout/transparent_border_with_ripple"/>
+
+        </android.support.v7.widget.CardView>
+
+        <!-- Row 4 -->
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/mi_learn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            >
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_main_menu_item_learn">
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/notebook"
+                    android:padding="4dp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_menu_title_learn"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/main_menu_item_title_size"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <include layout="@layout/transparent_border_with_ripple"/>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/mi_shop"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            >
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_main_menu_item_shop">
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/new_icon"
+                    android:padding="4dp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_menu_title_shop"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/main_menu_item_title_size"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <include layout="@layout/transparent_border_with_ripple"/>
+
+        </android.support.v7.widget.CardView>
+
+    </android.support.v7.widget.GridLayout>
+</android.support.constraint.ConstraintLayout>

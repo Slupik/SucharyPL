@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (c) 2018. by Sebastian Witasik
+  ~ Copyright (c) 2019. by Sebastian Witasik
   ~ All rights reserved. No part of this application may be reproduced or be part of other software, without the prior written permission of the publisher. For permission requests, write to the author(WitasikSebastian@gmail.com).
   -->
 
@@ -10,11 +10,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.view.activity.main.MainActivity">
+    tools:context=".app.view.activity.random.RandomJokesActivity">
 
     <fragment
         android:id="@+id/viewer"
-        android:name="io.github.slupik.sucharypl.app.view.fragment.menu.MenuFragment"
+        android:name="io.github.slupik.sucharypl.app.view.fragment.random.select.SelectRandomJokesFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="?android:attr/actionBarSize"
