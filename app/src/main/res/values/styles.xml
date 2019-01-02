@@ -40,4 +40,17 @@
         <item name="backgroundSplit">@drawable/main_gradient</item>
     </style>
 
+    <style name="AppTextSmallHead" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorPrimaryDarkText</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:typeface">sans</item>
+    </style>
+
+    <style name="AppTextSmallLabel" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorPrimaryDarkText</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:typeface">sans</item>
+    </style>
 </resources>
