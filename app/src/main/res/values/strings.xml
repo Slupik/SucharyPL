@@ -12,4 +12,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="random_jokes_title">Random Jokes</string>
+    <string name="btn_show_random">Random</string>
+    <string name="select_word_long">Long</string>
+    <string name="select_word_short">Short</string>
+    <string name="available_filters">Filters:</string>
+    <string name="available_categories">Categories:</string>
 </resources>

@@ -2,10 +2,17 @@
 <resources>
     <color name="colorPrimary">#FFAC2C</color>
     <color name="colorPrimaryDark">#EE8D08</color>
+    <color name="colorPrimaryMid">#FF9E07</color>
     <color name="colorPrimaryLight">#FFE372</color>
     <color name="colorAccent">#D03056</color>
     <color name="colorPrimaryText">#ffffff</color>
     <color name="colorPrimaryDarkText">#000000</color>
+    <color name="colorItemBorder">#CCCCCC</color>
+    <color name="colorInactiveText">#CCCCCC</color>
+    <color name="colorSecondaryText">#9C9C9C</color>
+
+    <color name="colorPrimaryShadow">#88FFAC2C</color>
+
 
     <color name="color_main_menu_item_joke">#FF6B6B</color>
     <color name="color_main_menu_item_random">#DC5EA5</color>

@@ -30,6 +30,8 @@ import io.github.slupik.sucharypl.R;
 
 public class LabelWithAction extends LinearLayout {
 
+    private static final float BORDER_WIDTH = 1.5f;
+
     @ColorInt
     private int mBorderColor;
     @ColorInt
@@ -93,7 +95,7 @@ public class LabelWithAction extends LinearLayout {
         shape.setShape(GradientDrawable.RECTANGLE);
         shape.setCornerRadius(1500);
         shape.setColor(Color.TRANSPARENT);
-        shape.setStroke((int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()), mBorderColor);
+        shape.setStroke((int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, BORDER_WIDTH, getResources().getDisplayMetrics()), mBorderColor);
         mainContainer.setBackground(shape);
         invalidate();
         requestLayout();

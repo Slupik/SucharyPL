@@ -27,6 +27,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     //Android view
+    implementation "com.google.android:flexbox:$flexBox"
     implementation "com.android.support:gridlayout-v7:$appcompat"
     implementation "com.android.support:design:$appcompat"
     implementation "com.android.support:recyclerview-v7:$appcompat"

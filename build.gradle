@@ -51,6 +51,7 @@ allprojects {
         versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
 
 
+        flexBox = "1.0.0"
         daggerVersion = "2.11"
         butterKnife = "8.8.1"
         picassoVersion = "2.5.2"

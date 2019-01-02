@@ -8,12 +8,17 @@ package io.github.slupik.sucharypl.app.view.fragment.random.select;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.flexbox.FlexboxLayout;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.github.slupik.sucharypl.R;
+import io.github.slupik.sucharypl.app.view.custom.element.LabelWithAction;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +39,9 @@ public class SelectRandomJokesFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    @BindView(R.id.flexboxLayout)
+    FlexboxLayout fbl;
 
     public SelectRandomJokesFragment() {
         // Required empty public constructor
@@ -70,7 +78,12 @@ public class SelectRandomJokesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_select_random_jokes, container, false);
+        View view = inflater.inflate(R.layout.fragment_select_random_jokes, container, false);
+        ButterKnife.bind(this, view);
+        LabelWithAction label = new LabelWithAction(getContext());
+        label.setText("Lorem");
+        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
