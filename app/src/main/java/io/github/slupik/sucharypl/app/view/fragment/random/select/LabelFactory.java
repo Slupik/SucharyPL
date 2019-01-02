@@ -7,6 +7,7 @@ package io.github.slupik.sucharypl.app.view.fragment.random.select;
 
 
 import android.content.Context;
+import android.util.TypedValue;
 
 import io.github.slupik.sucharypl.R;
 import io.github.slupik.sucharypl.app.view.custom.element.LabelWithAction;
@@ -25,7 +26,15 @@ final class LabelFactory {
         label.setBorderColor(context.getResources().getColor(R.color.colorItemBorder));
         label.setActionColor(context.getResources().getColor(R.color.colorSecondaryText));
 
+//        label.setPadding(dpi(context, 16),
+//                0,
+//                0,
+//                dpi(context, 8));
         return label;
+    }
+
+    private static int dpi(Context context, int value) {
+        return (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, context.getResources().getDisplayMetrics());
     }
 
 }

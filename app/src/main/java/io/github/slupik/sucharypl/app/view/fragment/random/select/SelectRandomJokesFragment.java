@@ -18,7 +18,6 @@ import com.google.android.flexbox.FlexboxLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.slupik.sucharypl.R;
-import io.github.slupik.sucharypl.app.view.custom.element.LabelWithAction;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,7 +39,7 @@ public class SelectRandomJokesFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    @BindView(R.id.flexboxLayout)
+    @BindView(R.id.flexboxLayout2)
     FlexboxLayout fbl;
 
     public SelectRandomJokesFragment() {
@@ -80,8 +79,15 @@ public class SelectRandomJokesFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_select_random_jokes, container, false);
         ButterKnife.bind(this, view);
-        LabelWithAction label = new LabelWithAction(getContext());
-        label.setText("Lorem");
+        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
+        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
+        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
+        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
+        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
+        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
+        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
+        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
+        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
         fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
         return view;
     }
