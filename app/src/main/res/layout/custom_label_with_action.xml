@@ -11,8 +11,8 @@
     android:id="@+id/custom_lwa_main_container"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/label_with_action_shape">
-
+    android:background="@drawable/label_with_action_shape"
+    android:foreground="@drawable/custom_label_with_action_ripple">
 
     <TextView
         android:id="@+id/custom_lwa_left_action"
