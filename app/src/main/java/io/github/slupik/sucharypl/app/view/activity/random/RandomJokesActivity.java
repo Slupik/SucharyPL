@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import io.github.slupik.domain.entity.joke.JokeSelectionPOJO;
 import io.github.slupik.sucharypl.R;
 import io.github.slupik.sucharypl.app.view.fragment.random.select.SelectRandomJokesFragment;
 import io.github.slupik.sucharypl.app.view.fragment.random.show.ShowRandomJokes;
@@ -23,6 +24,11 @@ public class RandomJokesActivity extends AppCompatActivity implements SelectRand
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onSetupComplete(JokeSelectionPOJO enteredData) {
 
     }
 }

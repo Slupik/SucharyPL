@@ -6,18 +6,28 @@
 package io.github.slupik.sucharypl.app.view.fragment.random.select;
 
 import android.content.Context;
-import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.google.android.flexbox.FlexboxLayout;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import io.github.slupik.domain.entity.category.JokeCategory;
+import io.github.slupik.domain.entity.joke.JokeSelectionPOJO;
 import io.github.slupik.sucharypl.R;
+import io.github.slupik.sucharypl.app.view.custom.element.LabelWithAction;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,38 +38,33 @@ import io.github.slupik.sucharypl.R;
  * create an instance of this fragment.
  */
 public class SelectRandomJokesFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final String INNER_DATA = "inner_data";
 
     private OnFragmentInteractionListener mListener;
+    private JokeSelectionPOJO mInitData;
 
-    @BindView(R.id.flexboxLayout2)
-    FlexboxLayout fbl;
+    @BindView(R.id.flJokeCategories)
+    FlexboxLayout mJokeCategories;
+    @BindView(R.id.flJokeFilters)
+    FlexboxLayout mJokeFilters;
+    @BindView(R.id.sbJokeLength)
+    SeekBar mJokeLength;
+    @BindView(R.id.tvSelectCategoriesTitle)
+    TextView mCategoriesTitle;
+    @BindView(R.id.tvSelectFiltersTitle)
+    TextView mFilterTitle;
+
+    private final List<LabelWithAction> mAvailableCategories = new ArrayList<>();
 
     public SelectRandomJokesFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SelectRandomJokesFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SelectRandomJokesFragment newInstance(String param1, String param2) {
+    public static SelectRandomJokesFragment newInstance(JokeSelectionPOJO data) {
         SelectRandomJokesFragment fragment = new SelectRandomJokesFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(INNER_DATA, new Gson().toJson(data));
         fragment.setArguments(args);
         return fragment;
     }
@@ -67,9 +72,36 @@ public class SelectRandomJokesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //For test purposes
+//        JokeCategory category = new JokeCategoryImpl(0, true, "Lorem");
+//        JokeCategory category1 = new JokeCategoryImpl(1, false, "Ipsum");
+//        JokeCategory category2 = new JokeCategoryImpl(2, true, "Doloret");
+//        JokeCategory category3 = new JokeCategoryImpl(3, false, "Esa at");
+//        JokeCategory category4 = new JokeCategoryImpl(4, false, "Vashinima");
+//        JokeCategory category5 = new JokeCategoryImpl(5, true, "Makumba czer");
+//        JokeSelectionPOJO pojo = new JokeSelectionPOJO();
+//        pojo.setJokeLength(50);
+//        List<JokeCategory> cat = new ArrayList<>();
+//        cat.add(category);
+//        cat.add(category1);
+//        cat.add(category2);
+//        cat.add(category3);
+//        cat.add(category4);
+//        cat.add(category5);
+//        pojo.setCategories(cat.toArray(new JokeCategory[0]));
+//        List<Integer> sele = new ArrayList<>();
+//        sele.add(0);
+//        sele.add(3);
+//        sele.add(4);
+//        pojo.setSelectedCategories(sele);
+//        mInitData = pojo;
+
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            String param = getArguments().getString(INNER_DATA);
+            mInitData = new Gson().fromJson(param, JokeSelectionPOJO.class);
+        } else {
+            mInitData = new JokeSelectionPOJO();
         }
     }
 
@@ -79,24 +111,69 @@ public class SelectRandomJokesFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_select_random_jokes, container, false);
         ButterKnife.bind(this, view);
-        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
-        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
-        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
-        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
-        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
-        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
-        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
-        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
-        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
-        fbl.addView(LabelFactory.createLabel(getContext(), "Lorem", null, "X"));
+        mAvailableCategories.clear();
+
+        int totalCategories = 0;
+        int totalFilters = 0;
+        for(JokeCategory category: mInitData.getCategories()) {
+            LabelWithAction label = LabelFactory.createLabel(getContext(), category);
+            LabelFactory.markSelected(label, mInitData.getSelectedCategories().contains(category.getId()));
+            if(category.isFilter()) {
+                mJokeFilters.addView(label);
+                totalFilters++;
+            } else {
+                mJokeCategories.addView(label);
+                totalCategories++;
+            }
+            label.putTempData(category);
+            mAvailableCategories.add(label);
+        }
+
+        if(totalCategories==0) {
+            mCategoriesTitle.setVisibility(View.GONE);
+            mJokeCategories.setVisibility(View.GONE);
+        }
+        if(totalFilters==0) {
+            mFilterTitle.setVisibility(View.GONE);
+            mJokeFilters.setVisibility(View.GONE);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            mJokeLength.setProgress(mInitData.getJokeLength(), true);
+        } else {
+            mJokeLength.setProgress(mInitData.getJokeLength());
+        }
+
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    @OnClick(R.id.btnShowRandomJokes)
+    public void onSearchRandomAction() {
+        mListener.onSetupComplete(getEnteredData());
+    }
+
+    private JokeSelectionPOJO getEnteredData() {
+        JokeSelectionPOJO jokeSelectionPOJO = new JokeSelectionPOJO();
+
+        jokeSelectionPOJO.setJokeLength(mJokeLength.getProgress());
+
+        List<JokeCategory> categories = new ArrayList<>();
+        List<Integer> selected = new ArrayList<>();
+
+        for(LabelWithAction labelWithAction:mAvailableCategories) {
+            if(labelWithAction.getTempData() instanceof LabelWithAction) {
+                JokeCategory category = (JokeCategory) labelWithAction.getTempData();
+                categories.add(category);
+                if(LabelUtils.isSelected(labelWithAction)) {
+                    selected.add(category.getId());
+                }
+            }
         }
+
+        jokeSelectionPOJO.setCategories(categories.toArray(new JokeCategory[0]));
+        jokeSelectionPOJO.setSelectedCategories(selected);
+
+        return jokeSelectionPOJO;
     }
 
     @Override
@@ -121,13 +198,9 @@ public class SelectRandomJokesFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onSetupComplete(JokeSelectionPOJO enteredData);
     }
+
 }

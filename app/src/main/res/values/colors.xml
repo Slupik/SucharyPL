@@ -9,6 +9,7 @@
     <color name="colorPrimaryDarkText">#000000</color>
     <color name="colorItemBorder">#CCCCCC</color>
     <color name="colorInactiveText">#CCCCCC</color>
+    <color name="colorInactiveTextDark">#8B8B8B</color>
     <color name="colorSecondaryText">#9C9C9C</color>
 
     <color name="colorPrimaryShadow">#88FFAC2C</color>

@@ -7,8 +7,11 @@ package io.github.slupik.sucharypl.app.view.fragment.random.select;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.TypedValue;
+import android.view.View;
 
+import io.github.slupik.domain.entity.category.JokeCategory;
 import io.github.slupik.sucharypl.R;
 import io.github.slupik.sucharypl.app.view.custom.element.LabelWithAction;
 
@@ -16,21 +19,40 @@ final class LabelFactory {
 
     private LabelFactory(){}
 
+    static void markSelected(LabelWithAction label, boolean isSelected) {
+        if(isSelected) {
+            label.setTextColor(label.getContext().getResources().getColor(R.color.colorPrimaryDark));
+            label.setBorderColor(label.getContext().getResources().getColor(R.color.colorItemBorder));
+        } else {
+            label.setTextColor(label.getContext().getResources().getColor(R.color.colorInactiveTextDark));
+            label.setBorderColor(Color.TRANSPARENT);
+        }
+        LabelUtils.markAsSelected(label, isSelected);
+        label.setActionColor(label.getContext().getResources().getColor(R.color.colorSecondaryText));
+    }
+
+    static LabelWithAction createLabel(Context context, JokeCategory category) {
+        return createLabel(context, category.getDisplayName(), null, "X");
+    }
+
     static LabelWithAction createLabel(Context context, String name, String leftAction, String rightAction) {
         LabelWithAction label = new LabelWithAction(context);
         label.setText(name);
         label.setLeftActionSymbol(leftAction);
         label.setRightActionSymbol(rightAction);
 
-        label.setTextColor(context.getResources().getColor(R.color.colorPrimaryDark));
-        label.setBorderColor(context.getResources().getColor(R.color.colorItemBorder));
-        label.setActionColor(context.getResources().getColor(R.color.colorSecondaryText));
-
-//        label.setPadding(dpi(context, 16),
-//                0,
-//                0,
-//                dpi(context, 8));
+        markSelected(label, false);
+        addStandardOption(label);
         return label;
+    }
+
+    private static void addStandardOption(final LabelWithAction label) {
+        label.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                markSelected(label, !LabelUtils.isSelected(label));
+            }
+        });
     }
 
     private static int dpi(Context context, int value) {

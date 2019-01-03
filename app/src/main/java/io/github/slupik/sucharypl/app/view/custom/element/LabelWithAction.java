@@ -54,6 +54,7 @@ public class LabelWithAction extends LinearLayout {
 
     private final List<ActionCallback> callbacks = new ArrayList<>();
     private Bundle bundle;
+    private Object mData;
 
     public LabelWithAction(Context context) {
         this(context, null);
@@ -185,6 +186,14 @@ public class LabelWithAction extends LinearLayout {
         for(ActionCallback callback:callbacks) {
             callback.onLeftAction();
         }
+    }
+
+    public void putTempData(Object data) {
+        mData = data;
+    }
+
+    public Object getTempData() {
+        return mData;
     }
 
     public interface ActionCallback {
