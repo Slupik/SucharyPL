@@ -4,7 +4,7 @@
   ~ All rights reserved. No part of this application may be reproduced or be part of other software, without the prior written permission of the publisher. For permission requests, write to the author(WitasikSebastian@gmail.com).
   -->
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
                                              xmlns:tools="http://schemas.android.com/tools"
                                              xmlns:custom="http://schemas.android.com/apk/res-auto"
@@ -12,118 +12,124 @@
              android:layout_height="match_parent"
              tools:context=".app.view.fragment.random.select.SelectRandomJokesFragment">
 
-    <TextView
-        android:id="@+id/tvSelectCategoriesTitle"
-        android:layout_width="wrap_content"
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/available_categories"
-        android:textAppearance="@style/AppTextSmallHead"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:paddingBottom="16dp">
 
-    <com.google.android.flexbox.FlexboxLayout
-        android:id="@+id/flJokeCategories"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:dividerDrawable="@drawable/categories_divider"
-        app:flexDirection="row"
-        app:flexWrap="wrap"
-        app:showDivider="middle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSelectCategoriesTitle"/>
+        <TextView
+            android:id="@+id/tvSelectCategoriesTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/available_categories"
+            android:textAppearance="@style/AppTextSmallHead"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-    <TextView
-        android:id="@+id/tvSelectFiltersTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/available_filters"
-        android:textAppearance="@style/AppTextSmallHead"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flJokeCategories"/>
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/flJokeCategories"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:dividerDrawable="@drawable/categories_divider"
+            app:flexDirection="row"
+            app:flexWrap="wrap"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSelectCategoriesTitle"
+            app:showDivider="middle"/>
 
-    <com.google.android.flexbox.FlexboxLayout
-        android:id="@+id/flJokeFilters"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:dividerDrawable="@drawable/categories_divider"
-        app:flexDirection="row"
-        app:flexWrap="wrap"
-        app:showDivider="middle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSelectFiltersTitle"/>
+        <TextView
+            android:id="@+id/tvSelectFiltersTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/available_filters"
+            android:textAppearance="@style/AppTextSmallHead"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/flJokeCategories"/>
 
-    <SeekBar
-        android:id="@+id/sbJokeLength"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="8dp"
-        android:max="100"
-        android:progress="100"
-        android:progressDrawable="@drawable/progress"
-        android:thumb="@drawable/thumb"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flJokeFilters"/>
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/flJokeFilters"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:dividerDrawable="@drawable/categories_divider"
+            app:flexDirection="row"
+            app:flexWrap="wrap"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSelectFiltersTitle"
+            app:showDivider="middle"/>
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/select_word_short"
-        android:textAppearance="@style/AppTextSmallLabel"
-        app:layout_constraintBottom_toTopOf="@+id/sbJokeLength"
-        app:layout_constraintStart_toStartOf="@+id/sbJokeLength"/>
+        <SeekBar
+            android:id="@+id/sbJokeLength"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="8dp"
+            android:max="100"
+            android:progress="100"
+            android:progressDrawable="@drawable/progress"
+            android:thumb="@drawable/thumb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/flJokeFilters"/>
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/select_word_long"
-        android:textAppearance="@style/AppTextSmallLabel"
-        app:layout_constraintBottom_toTopOf="@+id/sbJokeLength"
-        app:layout_constraintEnd_toEndOf="@+id/sbJokeLength"/>
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/select_word_short"
+            android:textAppearance="@style/AppTextSmallLabel"
+            app:layout_constraintBottom_toTopOf="@+id/sbJokeLength"
+            app:layout_constraintStart_toStartOf="@+id/sbJokeLength"/>
 
-    <Button
-        android:id="@+id/btnShowRandomJokes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/light_button"
-        android:text="@string/btn_show_random"
-        android:theme="@style/AppLightButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sbJokeLength"/>
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/select_word_long"
+            android:textAppearance="@style/AppTextSmallLabel"
+            app:layout_constraintBottom_toTopOf="@+id/sbJokeLength"
+            app:layout_constraintEnd_toEndOf="@+id/sbJokeLength"/>
 
-    <Button
-        android:id="@+id/btnShowContinueJokes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/light_button"
-        android:text="@string/btn_show_continue"
-        android:theme="@style/AppLightButton"
-        app:layout_constraintStart_toStartOf="parent"
-        custom:layout_constraintTop_toBottomOf="@+id/sbJokeLength"/>
+        <Button
+            android:id="@+id/btnShowRandomJokes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/light_button"
+            android:text="@string/btn_show_random"
+            android:theme="@style/AppLightButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sbJokeLength"/>
 
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/btnShowContinueJokes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/light_button"
+            android:text="@string/btn_show_continue"
+            android:theme="@style/AppLightButton"
+            app:layout_constraintStart_toStartOf="parent"
+            custom:layout_constraintTop_toBottomOf="@+id/sbJokeLength"/>
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
