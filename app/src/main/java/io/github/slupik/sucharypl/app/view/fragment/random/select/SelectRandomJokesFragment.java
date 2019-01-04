@@ -152,6 +152,11 @@ public class SelectRandomJokesFragment extends Fragment {
         mListener.onSetupComplete(getEnteredData());
     }
 
+    @OnClick(R.id.btnShowContinueJokes)
+    public void onContinueAction() {
+        mListener.onContinue();
+    }
+
     private JokeSelectionPOJO getEnteredData() {
         JokeSelectionPOJO jokeSelectionPOJO = new JokeSelectionPOJO();
 
@@ -201,6 +206,7 @@ public class SelectRandomJokesFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         void onSetupComplete(JokeSelectionPOJO enteredData);
+        void onContinue();
     }
 
 }

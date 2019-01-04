@@ -16,6 +16,7 @@ import io.github.slupik.sucharypl.app.view.fragment.random.show.ShowRandomJokes;
 
 public class RandomJokesActivity extends AppCompatActivity implements SelectRandomJokesFragment.OnFragmentInteractionListener, ShowRandomJokes.OnFragmentInteractionListener {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +30,11 @@ public class RandomJokesActivity extends AppCompatActivity implements SelectRand
 
     @Override
     public void onSetupComplete(JokeSelectionPOJO enteredData) {
+
+    }
+
+    @Override
+    public void onContinue() {
 
     }
 }
