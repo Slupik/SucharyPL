@@ -6,13 +6,23 @@
 package io.github.slupik.sucharypl.app.view.fragment.random.show;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.gson.Gson;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import io.github.slupik.domain.entity.category.JokeCategory;
+import io.github.slupik.domain.entity.joke.JokeOnline;
+import io.github.slupik.domain.entity.joke.JokeOnlinePOJO;
 import io.github.slupik.sucharypl.R;
 
 /**
@@ -24,16 +34,31 @@ import io.github.slupik.sucharypl.R;
  * create an instance of this fragment.
  */
 public class ShowRandomJokes extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_JOKE_DATA = "joke-data";
+    private JokeOnline mJokeData = new JokeOnlinePOJO();
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    @BindView(R.id.tvContent)
+    TextView tvContent;
+    @BindView(R.id.tvJokeCategories)
+    TextView tvJokeCategories;
+    @BindView(R.id.tvJokeRate)
+    TextView tvRateInfo;
+    @BindView(R.id.ivFavourite)
+    ImageView ivFavourite;
+    @BindView(R.id.ivLearn)
+    ImageView ivLearn;
+    @BindView(R.id.ivReport)
+    ImageView ivReport;
+    @BindView(R.id.ivJokeLike)
+    ImageView ivLike;
+    @BindView(R.id.ivJokeDislike)
+    ImageView ivDislike;
 
     private OnFragmentInteractionListener mListener;
+    private boolean favourite;
+    private boolean report;
+    private boolean toLearn;
+    private short likeState;
 
     public ShowRandomJokes() {
         // Required empty public constructor
@@ -43,16 +68,12 @@ public class ShowRandomJokes extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment ShowRandomJokes.
      */
-    // TODO: Rename and change types and number of parameters
-    public static ShowRandomJokes newInstance(String param1, String param2) {
+    public static ShowRandomJokes newInstance(JokeOnline jokeData) {
         ShowRandomJokes fragment = new ShowRandomJokes();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_JOKE_DATA, new Gson().toJson(jokeData));
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,9 +81,12 @@ public class ShowRandomJokes extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mJokeData = new JokeOnlinePOJO(8.32f, 1, new JokeCategory[0], "Lorem ipsum doloret",
+                true, true, true, (short) 1);
+
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mJokeData = new Gson().fromJson(getArguments().getString(ARG_JOKE_DATA), JokeOnlinePOJO.class);
         }
     }
 
@@ -70,14 +94,64 @@ public class ShowRandomJokes extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_show_random_jokes, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_show_random_jokes, container, false);
+        ButterKnife.bind(this, view);
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+        if(mJokeData.isReport()) {
+            ivReport.setVisibility(View.GONE);
+        } else {
+            ivReport.setVisibility(View.VISIBLE);
         }
+
+        switch (mJokeData.getLikeState()) {
+            case -1: {
+                ivLike.setColorFilter(R.color.colorSecondaryTextLight);
+                ivDislike.setColorFilter(Color.RED);
+                break;
+            }
+            case 1: {
+                ivLike.setColorFilter(Color.GREEN);
+                ivDislike.setColorFilter(R.color.colorSecondaryTextLight);
+                break;
+            }
+            default: {
+                ivLike.setColorFilter(R.color.colorSecondaryTextLight);
+                ivDislike.setColorFilter(R.color.colorSecondaryTextLight);
+                break;
+            }
+        }
+
+        tvContent.setText(mJokeData.getContent());
+
+        StringBuilder text = new StringBuilder();
+        for(int i=0;i<mJokeData.getCategories().length;i++) {
+            JokeCategory category = mJokeData.getCategories()[i];
+            text.append(category.getDisplayName());
+            if(i<mJokeData.getCategories().length-1) {
+                text.append(", ");
+            }
+        }
+        tvJokeCategories.setText(text.toString());
+        if(text.length()==0) {
+            tvJokeCategories.setVisibility(View.GONE);
+        }
+
+        String rate = Math.round(mJokeData.getRate()*100)/100+"/10";
+        tvRateInfo.setText(rate);
+
+        if(mJokeData.isToLearn()) {
+            ivLearn.setImageDrawable(getContext().getDrawable(R.drawable.ic_notebook_checked));
+        } else {
+            ivLearn.setImageDrawable(getContext().getDrawable(R.drawable.ic_notebook));
+        }
+
+        if(mJokeData.isFavourite()) {
+            ivFavourite.setImageDrawable(getContext().getDrawable(R.drawable.ic_full_star));
+        } else {
+            ivFavourite.setImageDrawable(getContext().getDrawable(R.drawable.ic_empty_star));
+        }
+
+        return view;
     }
 
     @Override
@@ -108,7 +182,6 @@ public class ShowRandomJokes extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

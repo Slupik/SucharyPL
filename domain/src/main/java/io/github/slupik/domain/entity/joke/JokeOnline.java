@@ -5,14 +5,6 @@
 
 package io.github.slupik.domain.entity.joke;
 
-import io.github.slupik.domain.entity.category.JokeCategory;
-
-public interface Joke {
-    int getId();
-    JokeCategory[] getCategories();
-    String getContent();
-    boolean isToLearn();
-    boolean isFavourite();
-    boolean isReport();
-    short getLikeState();
+public interface JokeOnline extends Joke {
+    float getRate();
 }
