@@ -1,0 +1,11 @@
+<!--
+  ~ Copyright (c) 2019. by Sebastian Witasik
+  ~ All rights reserved. No part of this application may be reproduced or be part of other software, without the prior written permission of the publisher. For permission requests, write to the author(WitasikSebastian@gmail.com).
+  -->
+
+<vector android:height="24dp" android:viewportHeight="43"
+    android:viewportWidth="44" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#00000000"
+        android:pathData="M17,16.4918L22,6L27,16.4918L38,18.0656L30,26.459L32,37.4754L22,32.2295L12,38L14,25.9344L6,18.0656L17,16.4918Z"
+        android:strokeColor="#FFDA44" android:strokeWidth="5"/>
+</vector>

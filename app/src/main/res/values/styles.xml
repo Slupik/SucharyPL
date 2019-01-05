@@ -54,6 +54,12 @@
         <item name="android:typeface">sans</item>
     </style>
 
+    <style name="AppJokeText" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorPrimaryDarkText</item>
+        <item name="android:typeface">sans</item>
+    </style>
+
     <style name="AppLightButton" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/light_button</item>
         <item name="android:paddingLeft">30dp</item>
