@@ -5,8 +5,9 @@
 
 package io.github.slupik.sucharypl.app.view.activity.random;
 
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import io.github.slupik.domain.entity.joke.JokeSelectionPOJO;
@@ -21,20 +22,67 @@ public class RandomJokesActivity extends AppCompatActivity implements SelectRand
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random_jokes);
+
+        showFragmentWithJokeSelection();
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
+    private void showFragmentWithJokeSelection() {
+        Fragment newFragment = new SelectRandomJokesFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.random_joke_container, newFragment);
+        transaction.commit();
     }
+
+    //TODO implement
 
     @Override
     public void onSetupComplete(JokeSelectionPOJO enteredData) {
-
+        showFragmentWithJoke();
+        //...
     }
 
     @Override
     public void onContinue() {
+        showFragmentWithJoke();
+        //...
+    }
+
+    private void showFragmentWithJoke() {
+        Fragment newFragment = new ShowRandomJokes();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.random_joke_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void onReport(boolean report) {
+
+
+    }
+
+    @Override
+    public void onLikeState(short state) {
+
+    }
+
+    @Override
+    public void addFavourite(int id) {
+
+    }
+
+    @Override
+    public void removeFavourite(int id) {
+
+    }
+
+    @Override
+    public void addToLearn(int id) {
+
+    }
+
+    @Override
+    public void removeToLearn(int id) {
 
     }
 }

@@ -7,7 +7,6 @@ package io.github.slupik.sucharypl.app.view.fragment.random.show;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -38,7 +37,6 @@ import static io.github.slupik.domain.entity.joke.JokeLikeState.NEUTRAL;
  * Use the {@link ShowRandomJokes#newInstance} factory method to
  * create an instance of this fragment.
  */
-//TODO implement actions for every click method
 public class ShowRandomJokes extends Fragment {
     private static final String ARG_JOKE_DATA = "joke-data";
     private JokeOnline mJokeData = new JokeOnlinePOJO();
@@ -165,11 +163,13 @@ public class ShowRandomJokes extends Fragment {
     }
 
     private void setReport(boolean report) {
+        mReport = report;
         if(report) {
             ivReport.setVisibility(View.GONE);
         } else {
             ivReport.setVisibility(View.VISIBLE);
         }
+        mListener.onReport(report);
     }
 
     private void setLikeState(short state) {
@@ -191,6 +191,7 @@ public class ShowRandomJokes extends Fragment {
                 break;
             }
         }
+        mListener.onLikeState(state);
     }
 
     private void setContent(String content) {
@@ -221,8 +222,10 @@ public class ShowRandomJokes extends Fragment {
         mFavourite = favourite;
         if(favourite) {
             ivFavourite.setImageDrawable(getContext().getDrawable(R.drawable.ic_full_star));
+            mListener.addFavourite(mJokeData.getId());
         } else {
             ivFavourite.setImageDrawable(getContext().getDrawable(R.drawable.ic_empty_star));
+            mListener.removeFavourite(mJokeData.getId());
         }
     }
 
@@ -230,8 +233,10 @@ public class ShowRandomJokes extends Fragment {
         mToLearn = toLearn;
         if(toLearn) {
             ivLearn.setImageDrawable(getContext().getDrawable(R.drawable.ic_notebook_checked));
+            mListener.addToLearn(mJokeData.getId());
         } else {
             ivLearn.setImageDrawable(getContext().getDrawable(R.drawable.ic_notebook));
+            mListener.removeToLearn(mJokeData.getId());
         }
     }
 
@@ -246,6 +251,11 @@ public class ShowRandomJokes extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
+        void onReport(boolean report);
+        void onLikeState(short state);
+        void addFavourite(int id);
+        void removeFavourite(int id);
+        void addToLearn(int id);
+        void removeToLearn(int id);
     }
 }

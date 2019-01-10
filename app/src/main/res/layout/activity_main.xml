@@ -13,7 +13,7 @@
     tools:context=".app.view.activity.main.MainActivity">
 
     <fragment
-        android:id="@+id/viewer"
+        android:id="@+id/random_joke_select_frag"
         android:name="io.github.slupik.sucharypl.app.view.fragment.menu.MenuFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
