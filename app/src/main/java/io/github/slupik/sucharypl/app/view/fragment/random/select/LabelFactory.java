@@ -23,16 +23,18 @@ final class LabelFactory {
         if(isSelected) {
             label.setTextColor(label.getContext().getResources().getColor(R.color.colorPrimaryDark));
             label.setBorderColor(label.getContext().getResources().getColor(R.color.colorItemBorder));
+            label.setRightActionSymbol("X");
         } else {
             label.setTextColor(label.getContext().getResources().getColor(R.color.colorInactiveTextDark));
             label.setBorderColor(Color.TRANSPARENT);
+            label.setRightActionSymbol(null);
         }
         LabelUtils.markAsSelected(label, isSelected);
         label.setActionColor(label.getContext().getResources().getColor(R.color.colorSecondaryText));
     }
 
     static LabelWithAction createLabel(Context context, JokeCategory category) {
-        return createLabel(context, category.getDisplayName(), null, "X");
+        return createLabel(context, category.getDisplayName(), null, null);
     }
 
     static LabelWithAction createLabel(Context context, String name, String leftAction, String rightAction) {
@@ -52,6 +54,14 @@ final class LabelFactory {
             public void onClick(View view) {
                 markSelected(label, !LabelUtils.isSelected(label));
             }
+        });
+        label.addCallback(new LabelWithAction.ActionCallback() {
+            @Override
+            public void onRightAction() {
+                markSelected(label, !LabelUtils.isSelected(label));
+            }
+            @Override
+            public void onLeftAction() {}
         });
     }
 
