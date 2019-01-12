@@ -7,40 +7,28 @@ package io.github.slupik.sucharypl.app.view.fragment.random.show;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.slupik.domain.entity.category.JokeCategory;
 import io.github.slupik.domain.entity.joke.JokeOnline;
-import io.github.slupik.domain.entity.joke.JokeOnlinePOJO;
 import io.github.slupik.sucharypl.R;
 
 import static io.github.slupik.domain.entity.joke.JokeLikeState.DISLIKE;
 import static io.github.slupik.domain.entity.joke.JokeLikeState.LIKE;
 import static io.github.slupik.domain.entity.joke.JokeLikeState.NEUTRAL;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ShowRandomJokes.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ShowRandomJokes#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ShowRandomJokes extends Fragment {
-    private static final String ARG_JOKE_DATA = "joke-data";
-    private JokeOnline mJokeData = new JokeOnlinePOJO();
+public class JokeDisplay extends FrameLayout {
 
+    private final JokeOnline mJokeData;
+    private final JokeController mController;
     @BindView(R.id.tvContent)
     TextView tvContent;
     @BindView(R.id.tvJokeCategories)
@@ -57,48 +45,19 @@ public class ShowRandomJokes extends Fragment {
     ImageView ivLike;
     @BindView(R.id.ivJokeDislike)
     ImageView ivDislike;
-
-    private OnFragmentInteractionListener mListener;
+    
     private boolean mFavourite;
     private boolean mReport;
     private boolean mToLearn;
     private short mLikeState;
 
-    public ShowRandomJokes() {
-        // Required empty public constructor
-    }
+    public JokeDisplay(@NonNull Context context, JokeOnline data, JokeController controller) {
+        super(context);
+        this.mJokeData = data;
+        this.mController = controller;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment ShowRandomJokes.
-     */
-    public static ShowRandomJokes newInstance(JokeOnline jokeData) {
-        ShowRandomJokes fragment = new ShowRandomJokes();
-        Bundle args = new Bundle();
-        args.putString(ARG_JOKE_DATA, new Gson().toJson(jokeData));
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mJokeData = new JokeOnlinePOJO(8.32f, 1, new JokeCategory[0], "Lorem ipsum doloret",
-                true, true, false, (short) 1);
-
-        if (getArguments() != null) {
-            mJokeData = new Gson().fromJson(getArguments().getString(ARG_JOKE_DATA), JokeOnlinePOJO.class);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_show_random_jokes, container, false);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.custom_joke_display, this);
         ButterKnife.bind(this, view);
 
         setReport(mJokeData.isReport());
@@ -108,25 +67,6 @@ public class ShowRandomJokes extends Fragment {
         setRate(mJokeData.getRate());
         setToLearn(mJokeData.isToLearn());
         setFavourite(mJokeData.isFavourite());
-
-        return view;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     @OnClick(R.id.ivJokeLike)
@@ -169,7 +109,7 @@ public class ShowRandomJokes extends Fragment {
         } else {
             ivReport.setVisibility(View.VISIBLE);
         }
-        mListener.onReport(report);
+        mController.onReport(report);
     }
 
     private void setLikeState(short state) {
@@ -191,7 +131,7 @@ public class ShowRandomJokes extends Fragment {
                 break;
             }
         }
-        mListener.onLikeState(state);
+        mController.onLikeState(state);
     }
 
     private void setContent(String content) {
@@ -222,10 +162,10 @@ public class ShowRandomJokes extends Fragment {
         mFavourite = favourite;
         if(favourite) {
             ivFavourite.setImageDrawable(getContext().getDrawable(R.drawable.ic_full_star));
-            mListener.addFavourite(mJokeData.getId());
+            mController.addFavourite(mJokeData.getId());
         } else {
             ivFavourite.setImageDrawable(getContext().getDrawable(R.drawable.ic_empty_star));
-            mListener.removeFavourite(mJokeData.getId());
+            mController.removeFavourite(mJokeData.getId());
         }
     }
 
@@ -233,29 +173,11 @@ public class ShowRandomJokes extends Fragment {
         mToLearn = toLearn;
         if(toLearn) {
             ivLearn.setImageDrawable(getContext().getDrawable(R.drawable.ic_notebook_checked));
-            mListener.addToLearn(mJokeData.getId());
+            mController.addToLearn(mJokeData.getId());
         } else {
             ivLearn.setImageDrawable(getContext().getDrawable(R.drawable.ic_notebook));
-            mListener.removeToLearn(mJokeData.getId());
+            mController.removeToLearn(mJokeData.getId());
         }
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        void onReport(boolean report);
-        void onLikeState(short state);
-        void addFavourite(int id);
-        void removeFavourite(int id);
-        void addToLearn(int id);
-        void removeToLearn(int id);
-    }
 }

@@ -10,13 +10,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import io.github.slupik.domain.entity.category.JokeCategory;
+import io.github.slupik.domain.entity.joke.JokeOnline;
+import io.github.slupik.domain.entity.joke.JokeOnlinePOJO;
 import io.github.slupik.domain.entity.joke.JokeSelectionPOJO;
 import io.github.slupik.sucharypl.R;
 import io.github.slupik.sucharypl.app.view.fragment.random.select.SelectRandomJokesFragment;
-import io.github.slupik.sucharypl.app.view.fragment.random.show.ShowRandomJokes;
+import io.github.slupik.sucharypl.app.view.fragment.random.show.JokeController;
+import io.github.slupik.sucharypl.app.view.fragment.random.show.JokesContainer;
+import io.github.slupik.sucharypl.app.view.fragment.random.show.ShowRandomJokesFragment;
 
-public class RandomJokesActivity extends AppCompatActivity implements SelectRandomJokesFragment.OnFragmentInteractionListener, ShowRandomJokes.OnFragmentInteractionListener {
-
+public class RandomJokesActivity extends AppCompatActivity implements SelectRandomJokesFragment.OnFragmentInteractionListener, ShowRandomJokesFragment.OnFragmentInteractionListener, JokeController {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +52,7 @@ public class RandomJokesActivity extends AppCompatActivity implements SelectRand
     }
 
     private void showFragmentWithJoke() {
-        Fragment newFragment = new ShowRandomJokes();
+        Fragment newFragment = new ShowRandomJokesFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.random_joke_container, newFragment);
         transaction.addToBackStack(null);
@@ -84,5 +88,26 @@ public class RandomJokesActivity extends AppCompatActivity implements SelectRand
     @Override
     public void removeToLearn(int id) {
 
+    }
+
+    @Override
+    public JokeController getJokeController() {
+        return this;
+    }
+
+    @Override
+    public JokesContainer getJokesContainer() {
+        return new JokesContainer() {
+            @Override
+            public int getCount() {
+                return 10;
+            }
+
+            @Override
+            public JokeOnline getJoke(int index) {
+                return new JokeOnlinePOJO(8.32f, 1, new JokeCategory[0], "Lorem ipsum doloret "+index,
+                        true, true, false, (short) 1);
+            }
+        };
     }
 }
