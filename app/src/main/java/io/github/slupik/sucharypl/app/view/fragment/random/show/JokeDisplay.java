@@ -6,11 +6,9 @@
 package io.github.slupik.sucharypl.app.view.fragment.random.show;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -25,6 +23,8 @@ import butterknife.OnClick;
 import io.github.slupik.domain.entity.category.JokeCategory;
 import io.github.slupik.domain.entity.joke.JokeOnline;
 import io.github.slupik.sucharypl.R;
+import io.github.slupik.sucharypl.app.view.custom.dialog.AskingDialog;
+import io.github.slupik.sucharypl.app.view.custom.dialog.ConfirmationDialog;
 import io.github.slupik.sucharypl.app.view.custom.dialog.FavouritesDialog;
 
 import static io.github.slupik.domain.entity.joke.JokeLikeState.DISLIKE;
@@ -71,7 +71,7 @@ public class JokeDisplay extends FrameLayout {
         setContent(mJokeData.getContent());
         setCategories(mJokeData.getCategories());
         setRate(mJokeData.getRate());
-        setToLearn(mJokeData.isToLearn());
+        setToLearn(mJokeData.isToLearn(), true);
         setFavourite(mJokeData.isFavourite(), true);
     }
 
@@ -109,7 +109,7 @@ public class JokeDisplay extends FrameLayout {
     }
 
     private void setReport(boolean report) {
-        //TODO add dialog
+        //TODO add dialog with more information
         mReport = report;
         if(report) {
             ivReport.setVisibility(View.GONE);
@@ -190,22 +190,15 @@ public class JokeDisplay extends FrameLayout {
                 });
                 dialog.show();
             } else {
-                //TODO stylisation
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage(getString(R.string.dialog_fav_remove_title))
-                        .setCancelable(false)
-                        .setPositiveButton(getString(R.string.dialog_fav_remove_yes), new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
+                new ConfirmationDialog(getContext())
+                        .setMessage(R.string.dialog_fav_remove_title)
+                        .setListener(new AskingDialog.Listener() {
+                            @Override
+                            public void onConfirm() {
                                 setFavourite(false, true);
                             }
                         })
-                        .setNegativeButton(getString(R.string.dialog_fav_remove_no), new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
+                        .show();
             }
         }
     }
@@ -214,15 +207,43 @@ public class JokeDisplay extends FrameLayout {
         return getContext().getString(res);
     }
 
-    private void setToLearn(boolean toLearn) {
-        //TODO add confirmation dialog
-        mToLearn = toLearn;
-        if(toLearn) {
-            ivLearn.setImageDrawable(getContext().getDrawable(R.drawable.ic_notebook_checked));
-            mController.addToLearn(mJokeData.getId());
+    private void setToLearn(final boolean toLearn) {
+        setToLearn(toLearn, false);
+    }
+
+    private void setToLearn(final boolean toLearn, boolean force) {
+        if(force) {
+            //TODO connect to the background
+            mToLearn = toLearn;
+            if(toLearn) {
+                ivLearn.setImageDrawable(getContext().getDrawable(R.drawable.ic_notebook_checked));
+                mController.addToLearn(mJokeData.getId());
+            } else {
+                ivLearn.setImageDrawable(getContext().getDrawable(R.drawable.ic_notebook));
+                mController.removeToLearn(mJokeData.getId());
+            }
         } else {
-            ivLearn.setImageDrawable(getContext().getDrawable(R.drawable.ic_notebook));
-            mController.removeToLearn(mJokeData.getId());
+            if(toLearn) {
+                new ConfirmationDialog(getContext())
+                        .setMessage(R.string.dialog_confirm_learn_add)
+                        .setListener(new AskingDialog.Listener() {
+                            @Override
+                            public void onConfirm() {
+                                setToLearn(true, true);
+                            }
+                        })
+                        .show();
+            } else {
+                new ConfirmationDialog(getContext())
+                        .setMessage(R.string.dialog_confirm_learn_remove)
+                        .setListener(new AskingDialog.Listener() {
+                            @Override
+                            public void onConfirm() {
+                                setToLearn(false, true);
+                            }
+                        })
+                        .show();
+            }
         }
     }
 

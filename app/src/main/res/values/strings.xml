@@ -43,8 +43,14 @@
     <string name="dialog_fav_cancel">Cancel</string>
     <string name="dialog_fav_save">Save</string>
     <string name="dialog_favourites_header">Add to favourites</string>
+
     <string name="dialog_fav_remove_title">Are you sure that it\'s not your favourite joke?</string>
     <string name="dialog_fav_remove_no">No</string>
     <string name="dialog_fav_remove_yes">Yes</string>
+
+    <string name="dialog_confirm_yes">Yes</string>
+    <string name="dialog_confirm_no">No</string>
+    <string name="dialog_confirm_learn_add">Do you really want to add this joke to your learning list?</string>
+    <string name="dialog_confirm_learn_remove">Do you really want to remove this joke from your list to learn?</string>
 
 </resources>
