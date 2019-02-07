@@ -3,6 +3,18 @@
     <string name="lorem_ipsum_mid">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla molestie sit amet enim maximus elementum. Vestibulum fringilla nisl quis risus consequat bibendum. Donec at erat imperdiet, rhoncus libero at, accumsan nisl. Quisque porttitor tortor ut nunc finibus, sit amet laoreet est molestie.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!--
+
+        MULTIPLE USAGE
+
+    -->
+    <string name="add_filter_label">Add new</string>
+
+    <!--
+
+        MAIN MENU
+
+    -->
     <string name="main_menu_title_random">Random</string>
     <string name="main_menu_title_fav">Favourites</string>
     <string name="main_menu_title_cat">Categories</string>
@@ -10,6 +22,11 @@
     <string name="main_menu_title_learn">Master of jokes</string>
     <string name="main_menu_title_shop">Shop</string>
 
+    <!--
+
+        RANDOM JOKES
+
+    -->
     <string name="random_jokes_title">Random Jokes</string>
     <string name="btn_show_random">Random</string>
     <string name="btn_show_continue">Continue</string>
@@ -17,4 +34,17 @@
     <string name="select_word_short">Short</string>
     <string name="available_filters">Filters:</string>
     <string name="available_categories">Categories:</string>
+
+    <!--
+
+        DISPLAY JOKE
+
+    -->
+    <string name="dialog_fav_cancel">Cancel</string>
+    <string name="dialog_fav_save">Save</string>
+    <string name="dialog_favourites_header">Add to favourites</string>
+    <string name="dialog_fav_remove_title">Are you sure that it\'s not your favourite joke?</string>
+    <string name="dialog_fav_remove_no">No</string>
+    <string name="dialog_fav_remove_yes">Yes</string>
+
 </resources>

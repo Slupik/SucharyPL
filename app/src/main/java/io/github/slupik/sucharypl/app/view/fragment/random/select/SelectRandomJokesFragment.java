@@ -27,6 +27,8 @@ import butterknife.OnClick;
 import io.github.slupik.domain.entity.category.JokeCategory;
 import io.github.slupik.domain.entity.joke.JokeSelectionPOJO;
 import io.github.slupik.sucharypl.R;
+import io.github.slupik.sucharypl.app.view.custom.element.LabelFactory;
+import io.github.slupik.sucharypl.app.view.custom.element.LabelUtils;
 import io.github.slupik.sucharypl.app.view.custom.element.LabelWithAction;
 
 /**

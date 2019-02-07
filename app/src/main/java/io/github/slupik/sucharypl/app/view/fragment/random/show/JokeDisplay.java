@@ -6,13 +6,18 @@
 package io.github.slupik.sucharypl.app.view.fragment.random.show;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,6 +25,7 @@ import butterknife.OnClick;
 import io.github.slupik.domain.entity.category.JokeCategory;
 import io.github.slupik.domain.entity.joke.JokeOnline;
 import io.github.slupik.sucharypl.R;
+import io.github.slupik.sucharypl.app.view.custom.dialog.FavouritesDialog;
 
 import static io.github.slupik.domain.entity.joke.JokeLikeState.DISLIKE;
 import static io.github.slupik.domain.entity.joke.JokeLikeState.LIKE;
@@ -45,7 +51,7 @@ public class JokeDisplay extends FrameLayout {
     ImageView ivLike;
     @BindView(R.id.ivJokeDislike)
     ImageView ivDislike;
-    
+
     private boolean mFavourite;
     private boolean mReport;
     private boolean mToLearn;
@@ -66,12 +72,12 @@ public class JokeDisplay extends FrameLayout {
         setCategories(mJokeData.getCategories());
         setRate(mJokeData.getRate());
         setToLearn(mJokeData.isToLearn());
-        setFavourite(mJokeData.isFavourite());
+        setFavourite(mJokeData.isFavourite(), true);
     }
 
     @OnClick(R.id.ivJokeLike)
     void onLikeClick() {
-        if(mLikeState==1) {
+        if(mLikeState==LIKE) {
             setLikeState(NEUTRAL);
         } else {
             setLikeState(LIKE);
@@ -103,6 +109,7 @@ public class JokeDisplay extends FrameLayout {
     }
 
     private void setReport(boolean report) {
+        //TODO add dialog
         mReport = report;
         if(report) {
             ivReport.setVisibility(View.GONE);
@@ -159,17 +166,56 @@ public class JokeDisplay extends FrameLayout {
     }
 
     private void setFavourite(boolean favourite) {
-        mFavourite = favourite;
-        if(favourite) {
-            ivFavourite.setImageDrawable(getContext().getDrawable(R.drawable.ic_full_star));
-            mController.addFavourite(mJokeData.getId());
-        } else {
-            ivFavourite.setImageDrawable(getContext().getDrawable(R.drawable.ic_empty_star));
-            mController.removeFavourite(mJokeData.getId());
+        setFavourite(favourite, false);
+    }
+    private void setFavourite(boolean favourite, boolean force) {
+        if(force) {
+            //TODO connect to the background
+            mFavourite = favourite;
+            if(favourite) {
+                ivFavourite.setImageDrawable(getContext().getDrawable(R.drawable.ic_full_star));
+                mController.addFavourite(mJokeData.getId());
+            } else {
+                ivFavourite.setImageDrawable(getContext().getDrawable(R.drawable.ic_empty_star));
+                mController.removeFavourite(mJokeData.getId());
+            }
+        } else  {
+            if(favourite) {
+                FavouritesDialog dialog = new FavouritesDialog(getContext());
+                dialog.setOnSave(new FavouritesDialog.OnSaveListener() {
+                    @Override
+                    public void onSave(List<JokeCategory> selected) {
+                        setFavourite(true, true);
+                    }
+                });
+                dialog.show();
+            } else {
+                //TODO stylisation
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage(getString(R.string.dialog_fav_remove_title))
+                        .setCancelable(false)
+                        .setPositiveButton(getString(R.string.dialog_fav_remove_yes), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                setFavourite(false, true);
+                            }
+                        })
+                        .setNegativeButton(getString(R.string.dialog_fav_remove_no), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
         }
     }
 
+    private String getString(@StringRes int res) {
+        return getContext().getString(res);
+    }
+
     private void setToLearn(boolean toLearn) {
+        //TODO add confirmation dialog
         mToLearn = toLearn;
         if(toLearn) {
             ivLearn.setImageDrawable(getContext().getDrawable(R.drawable.ic_notebook_checked));
