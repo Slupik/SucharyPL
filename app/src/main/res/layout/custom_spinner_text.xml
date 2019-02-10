@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2019. by Sebastian Witasik
+  ~ All rights reserved. No part of this application may be reproduced or be part of other software, without the prior written permission of the publisher. For permission requests, write to the author(WitasikSebastian@gmail.com).
+  -->
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@android:id/text1"
+          style="@style/spinnerItemStyle"
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent"
+          android:ellipsize="marquee"
+          android:gravity="center"
+          android:layoutDirection="ltr"
+          android:paddingStart="2dp"
+          android:singleLine="true"/>

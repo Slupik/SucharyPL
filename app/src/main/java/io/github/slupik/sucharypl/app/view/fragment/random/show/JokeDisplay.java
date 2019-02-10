@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -26,6 +27,8 @@ import io.github.slupik.sucharypl.R;
 import io.github.slupik.sucharypl.app.view.custom.dialog.AskingDialog;
 import io.github.slupik.sucharypl.app.view.custom.dialog.ConfirmationDialog;
 import io.github.slupik.sucharypl.app.view.custom.dialog.FavouritesDialog;
+import io.github.slupik.sucharypl.app.view.custom.dialog.ReportDialog;
+import io.github.slupik.sucharypl.app.view.model.ReportCategory;
 
 import static io.github.slupik.domain.entity.joke.JokeLikeState.DISLIKE;
 import static io.github.slupik.domain.entity.joke.JokeLikeState.LIKE;
@@ -109,14 +112,30 @@ public class JokeDisplay extends FrameLayout {
     }
 
     private void setReport(boolean report) {
-        //TODO add dialog with more information
-        mReport = report;
-        if(report) {
-            ivReport.setVisibility(View.GONE);
+        setReport(report, false);
+    }
+    private void setReport(boolean report, boolean force) {
+        if(force) {
+            mReport = report;
+            if(report) {
+                ivReport.setVisibility(View.GONE);
+            } else {
+                ivReport.setVisibility(View.VISIBLE);
+            }
         } else {
-            ivReport.setVisibility(View.VISIBLE);
+            if(report) {
+                new ReportDialog(getContext()).setListener(new ReportDialog.Listener() {
+                    @Override
+                    public void onConfirm(ReportCategory category) {
+                        setReport(true, true);
+                        mController.onReport(true);
+                        Toast.makeText(getContext(), R.string.report_toast, Toast.LENGTH_SHORT).show();
+
+                        //TODO implement backend
+                    }
+                }).show();
+            }
         }
-        mController.onReport(report);
     }
 
     private void setLikeState(short state) {

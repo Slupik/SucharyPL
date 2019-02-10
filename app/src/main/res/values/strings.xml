@@ -53,4 +53,21 @@
     <string name="dialog_confirm_learn_add">Do you really want to add this joke to your learning list?</string>
     <string name="dialog_confirm_learn_remove">Do you really want to remove this joke from your list to learn?</string>
 
+    <!--
+
+        REPORT JOKE
+
+    -->
+    <string name="report_category_typo">Typo</string>
+    <string name="report_category_offensive">Offensive</string>
+    <string name="report_category_copyright">Copyright</string>
+    <string name="report_category_other">Other</string>
+
+    <string name="dialog_report_title">Report form</string>
+    <string name="dialog_report_category">Reason:</string>
+    <string name="dialog_report_btn_report">Report</string>
+    <string name="dialog_report_btn_cancel">Cancel</string>
+    <string name="report_toast">Thank you for help!</string>
+
+
 </resources>
