@@ -69,5 +69,16 @@
     <string name="dialog_report_btn_cancel">Cancel</string>
     <string name="report_toast">Thank you for help!</string>
 
+    <!--
+
+        NEW FILTER
+
+    -->
+    <string name="dialog_new_filter_header">New filter</string>
+    <string name="dialog_new_filter_field">Name</string>
+    <string name="dialog_new_filter_save">Add</string>
+    <string name="dialog_new_filter_cancel">Cancel</string>
+    <string name="new_filter_exists">This filter already exists</string>
+
 
 </resources>

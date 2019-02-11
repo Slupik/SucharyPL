@@ -45,6 +45,10 @@ public final class LabelFactory {
         return createLabel(context, category.getDisplayName(), null, null);
     }
 
+    public static LabelWithAction createLabel(Context context, String name) {
+        return createLabel(context, name, null, null);
+    }
+
     public static LabelWithAction createLabel(Context context, String name, String leftAction, String rightAction) {
         LabelWithAction label = new LabelWithAction(context);
         label.setText(name);

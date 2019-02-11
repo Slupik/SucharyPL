@@ -23,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.slupik.domain.entity.category.JokeCategory;
+import io.github.slupik.domain.entity.filter.FilterCreatorChecker;
 import io.github.slupik.sucharypl.R;
 import io.github.slupik.sucharypl.app.view.custom.element.LabelFactory;
 import io.github.slupik.sucharypl.app.view.custom.element.LabelWithAction;
@@ -54,7 +55,22 @@ public class FavouritesDialog extends Dialog {
         mAddNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO connect to the background
+                new NewFilterDialog(getContext(), new FilterCreatorChecker() {
+                    @Override
+                    public boolean isAvailable(String name) {
+                        //TODO replace with real checker
+                        return true;
+                    }
+                }).setOnSave(new NewFilterDialog.OnSaveListener() {
+                    @Override
+                    public void onSave(String name) {
+                        LabelWithAction lbl = LabelFactory.createLabel(getContext(), name);
+                        LabelFactory.markSelected(lbl, true);
+                        mJokeFilters.removeView(mAddNew);
+                        mJokeFilters.addView(lbl);
+                        mJokeFilters.addView(mAddNew);
+                    }
+                }).show();
             }
         });
         mJokeFilters.addView(mAddNew);
